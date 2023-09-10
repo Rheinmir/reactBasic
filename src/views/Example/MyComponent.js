@@ -1,46 +1,38 @@
 import React from 'react';
+import ChildComponent from './ChildComponent';
+import AddComponent from './AddComponent';
 
 class MyComponent extends React.Component {
 
-    //key:value
     state = {
-        name: 'Rhine',
-        college: 'Hutech'
+        arrJobs: [
+            { id: 'abcJob1', title: 'Developers', salary: '500'},
+            { id: 'abcJob2', title: 'Testers', salary: '400'},
+            { id: 'abcJob3', title: 'Project managers', salary: '1000'}
+        ]
     }
-    /*
-    JSX
-    fragment
 
+    addNewJob = (job) => {
+        console.log('check job from parent', job)
+        // this.setState({
+        //     arrJobs: !this.state.arrJobs.push(job)
+        // })
 
-    */
-    handleOnchangeName = (event) => {
-        // console.log(event.target.value,'event target: ', event.target, 'event object',event)
-        //check How React catch User's input
-        //merge
-        this.setState({
-            name: event.target.value,
-        })
-    }
-    handleClickButton = () => {
-        alert('Click me')
     }
     render() {
-        // console.log('call render:', this.state)
+        // console.log('check prop:', this.props)
         // check how many times React's re-render
         return (
             <>
-                <div className="first">
-                    <input value={this.state.name} type="text" 
-                        onChange={(event) => this.handleOnchangeName(event)}
-                    />
-                    My name is { this.state['name'] }
-                </div>
-                <div className="second">
-                    My University: { this.state.college }
-                </div>
-                <div className="third">
-                    <button onClick={() => {this.handleClickButton()}}>Click me</button>
-                </div>
+                <AddComponent 
+                    addNewJob={this.addNewJob}
+                />
+                 
+
+                <ChildComponent
+                    arrJobs={this.state.arrJobs}
+                />
+                
             </>
         )
 
